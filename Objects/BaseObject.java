@@ -43,14 +43,18 @@ public class BaseObject extends Shape {
     @Override
     public Point getPortLocation(int direction) {
         Point portLocation = null;
-        if (direction == Direction.UP) {// up
-            portLocation = new Point(this.width / 2, portSize);
-        } else if (direction == Direction.LEFT) {// left
-            portLocation = new Point(portSize, this.height / 2);
-        } else if (direction == Direction.DOWN) {// down
-            portLocation = new Point(this.width / 2, this.height - portSize);
-        } else if (direction == Direction.RIGHT) {// right
-            portLocation = new Point(this.width - portSize, this.height / 2);
+        if (direction == Direction.UP) {
+            // UP
+            portLocation = new Point(this.width/2, portSize);
+        } else if (direction == Direction.LEFT) {
+            // LEFT
+            portLocation = new Point(portSize, this.height/2);
+        } else if (direction == Direction.DOWN) {
+            // DOWN
+            portLocation = new Point(this.width/2, this.height-portSize);
+        } else if (direction == Direction.RIGHT) {
+            // RIGHT
+            portLocation = new Point(this.width - portSize, this.height/2);
         }
         return canvas.convertPointToCanvas(this, portLocation);
     }
@@ -58,8 +62,11 @@ public class BaseObject extends Shape {
     @Override
     public int getPortDirection(Point point) {
         point = canvas.convertPointToComponent(this, point);
-        Point port = new Point((-1 * ((float) height / width) * point.x + height - point.y) > 0 ? 1 : 0 // 1:左上 0:右下
-                , ((float) height / width * point.x - point.y) > 0 ? 1 : 0);// 1:右上 0:左下
+        
+        // 使用斜率為 -1 的直線來判斷點在直線的哪一側
+        Point port = new Point(
+            (-1 * ((float) height/width) * point.x + height - point.y) > 0 ? 1 : 0 // 1:左上 0:右下
+            , ((float) height / width * point.x - point.y) > 0 ? 1 : 0);           // 1:右上 0:左下
 
         int result = port.x * 2 + port.y;
 

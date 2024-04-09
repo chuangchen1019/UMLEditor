@@ -16,7 +16,7 @@ public abstract class CreateObjectMode extends Mode {
         super.mouseClicked(e);
         Shape object = createObject();
         object.setLocation(clickPoint);
-        System.out.println(clickPoint.x + " " + clickPoint.y);
+        System.out.println("Click | " + clickPoint.x + " " + clickPoint.y);
         object.addToCanvas();
         canvas.printComponents();
     }

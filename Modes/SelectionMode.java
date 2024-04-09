@@ -4,9 +4,13 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
+import Objects.SelectRegion;
 import Objects.Shape;
 
 public class SelectionMode extends Mode {
+    private Shape pressComponent = null;  
+    private Point offset = null;
+  
     public SelectionMode() {
         super();
     }
@@ -20,14 +24,8 @@ public class SelectionMode extends Mode {
         if (component != null) {
             Shape obj = (Shape) component;
             canvas.unselectAll();
-            if (!obj.isSelected()) {
-                System.out.println("[D]]");
-                obj.select();
-            }
-        } else {
-            System.out.print("Get no component");
-            canvas.unselectAll();
-        }
+            if (!obj.isSelected()) obj.select();
+        } else canvas.unselectAll();
     }
     
     @Override
@@ -35,8 +33,40 @@ public class SelectionMode extends Mode {
         super.mousePressed(e);
         Component component = canvas.getComponentAt(pressPoint.x, pressPoint.y);
         if (component != null) {
-            
+            pressComponent = (Shape) component;
+            Point location = pressComponent.getLocation();
+            offset = new Point(location.x - pressPoint.x, location.y - pressPoint.y);
         }else{
+            canvas.add(SelectRegion.getInstance());
         }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        super.mouseReleased(e);
+        pressComponent = null;
+        if (isDragged) {
+            isDragged = false;
+            canvas.unselectAll();
+            Point leftTop = new Point(
+                Math.min(pressPoint.x, releasePoint.x),
+                Math.min(pressPoint.y, releasePoint.y)
+            );
+            Point rightDown = new Point(
+                Math.max(pressPoint.x, releasePoint.x),
+                Math.max(pressPoint.y, releasePoint.y)
+            );
+            canvas.selectFrom(leftTop, rightDown);
+        }
+        canvas.cleanSelectRegion();
+        canvas.remove(SelectRegion.getInstance());
+    }
+
+        @Override
+    public void mouseDragged(MouseEvent e) {
+        super.mouseDragged(e);
+        if (pressComponent != null) 
+            pressComponent.setLocation(e.getX() + offset.x, e.getY() + offset.y);
+        else canvas.setSelectRegion(pressPoint, e.getPoint());
     }
 }

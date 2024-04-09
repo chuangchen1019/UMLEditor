@@ -26,26 +26,26 @@ public class UseCaseObject extends BaseObject {
         super.paintComponent(g);
         this.setSize(this.width, this.height);
         
+        int ovalW = width - portSize * 2;
+        int ovalH = height - portSize * 2;
+
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
-        int ovalwidth = width - portSize * 3;
-        int ovalheight = height - portSize * 2;
-        
-        g.drawOval(portSize, portSize, ovalwidth, ovalheight);
-        g2d.setColor(Color.LIGHT_GRAY);
+        g2d.setColor(Color.lightGray);
         
         // draw oval
-        g2d.fillOval(portSize, portSize, ovalwidth, ovalheight);;
+        oval.setFrame(portSize, portSize, ovalW, ovalH);
+        g2d.fillOval(portSize, portSize, ovalW, ovalH);;
         g2d.setColor(Color.GRAY);
+        g2d.drawOval(portSize, portSize, ovalW - 1, ovalH - 1);
 
         // get text length
-        int textWidth = g2d.getFontMetrics().stringWidth(this.getName());
-        int textHeight = g2d.getFontMetrics().getHeight();
+        int textW = g2d.getFontMetrics().stringWidth(this.getName());
+        int textH = g2d.getFontMetrics().getHeight();
 
         // get alignment position
-        int x = (width - textWidth) / 2;
-        int y = (height - textHeight) / 2 + textHeight - g2d.getFontMetrics().getDescent();
+        int x = (width - textW) / 2;
+        int y = (height - textH) / 2 + textH - g2d.getFontMetrics().getDescent();
         g2d.drawString(this.getName(), x, y);
 
     }
@@ -54,5 +54,4 @@ public class UseCaseObject extends BaseObject {
     public boolean contains(int x, int y) {
         return oval.contains(x, y);
     }
-    
 }

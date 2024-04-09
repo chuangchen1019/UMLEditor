@@ -1,10 +1,13 @@
 package Editor.CanvasArea;
 import javax.swing.*;
+
+import Objects.SelectRegion;
 import Objects.Shape;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Point;
 import java.util.ArrayList;
+import Debug.EditorLogger;
 
 
 public class Canvas extends JPanel {
@@ -71,6 +74,16 @@ public class Canvas extends JPanel {
         }
     }
 
+    public void setSelectRegion(Point src, Point dst) {
+        SelectRegion.getInstance().freshRegionBorder(src, dst);
+        refresh();
+    }
+
+    public void cleanSelectRegion() {
+        SelectRegion.getInstance().freshRegionBorder(new Point(0, 0), new Point(0, 0));
+        refresh();
+    }
+
     public void unselectAll() {
         for (Shape obj : this.shapeList) {
             obj.unselect();
@@ -83,7 +96,7 @@ public class Canvas extends JPanel {
 
     public void printAllShape() {
         for (Shape obj : this.shapeList) {
-            System.out.println("[DEBUG]shapeList: " + obj.getName());
+            System.out.println("shapeList: " + obj.getName());
         }
     }
 
@@ -91,7 +104,7 @@ public class Canvas extends JPanel {
         System.out.println("Components in Canvas:");
         Component[] components = this.box.getComponents();
         for (Component comp : components) {
-            System.out.println("[Debug]: " + comp);
+            System.out.println("[Debug] " + comp);
         }
     }
 
