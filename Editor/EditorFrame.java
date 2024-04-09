@@ -1,6 +1,5 @@
 package Editor;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import Editor.CanvasArea.Canvas;
 import Editor.ModeArea.ToolPanel;
 

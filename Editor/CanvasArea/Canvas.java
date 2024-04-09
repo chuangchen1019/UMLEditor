@@ -7,8 +7,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Point;
 import java.util.ArrayList;
-import Debug.EditorLogger;
-
 
 public class Canvas extends JPanel {
     private static Canvas canvas;

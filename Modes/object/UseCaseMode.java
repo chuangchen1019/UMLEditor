@@ -1,6 +1,5 @@
 package Modes.object;
 
-import Objects.ClassObject;
 import Objects.Shape;
 import Objects.UseCaseObject;
 
