@@ -2,9 +2,9 @@ package Modes.line;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import Objects.Shape;
+import Objects.LineObject;
 import Objects.Direction;
 import Modes.Mode;
-import Objects.LineObject;
 
 public abstract class LineMode extends Mode {
     private LineObject line = null;

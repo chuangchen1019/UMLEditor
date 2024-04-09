@@ -4,11 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 
 public class AssociationLine extends LineStyle {
-
-    @Override
-    protected void drawTail(Graphics2D g2d, Point head, Point tail) {
-    }
-
     @Override
     protected void drawHead(Graphics2D g2d, Point head, Point tail) {
         double angle = Math.atan2(tail.y - head.y, tail.x - head.x);

@@ -1,6 +1,6 @@
 package Modes.line;
 
-import Objects.AssociationLine;
+import Objects.CompositionLine;
 import Objects.LineObject;
 
 public class CompositionMode extends LineMode {
@@ -10,6 +10,6 @@ public class CompositionMode extends LineMode {
 
     @Override
     public LineObject newLine(){
-        return new LineObject(new AssociationLine());
+        return new LineObject(new CompositionLine());
     }
 }

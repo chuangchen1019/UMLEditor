@@ -20,6 +20,7 @@ public class ToolPanel extends JPanel {
     public ToolPanel() {
         toolPanel = new JPanel();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        toolPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         addButtons();
         // set default selection mode
         buttons[0].doClick();

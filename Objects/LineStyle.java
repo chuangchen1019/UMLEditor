@@ -15,10 +15,10 @@ public abstract class LineStyle {
 		g2d.setColor(this.color);
         this.drawLine(g2d, head, tail);
         this.drawHead(g2d, head, tail);
-        this.drawTail(g2d, head, tail);
+        // this.drawTail(g2d, head, tail);
     }
 
-    protected abstract void drawTail(Graphics2D g2d, Point head, Point tail);
+    // protected abstract void drawTail(Graphics2D g2d, Point head, Point tail);
     protected abstract void drawHead(Graphics2D g2d, Point head, Point tail);
 
     protected void drawLine(Graphics2D g2d, Point head, Point tail){

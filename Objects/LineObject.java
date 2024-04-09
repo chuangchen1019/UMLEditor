@@ -6,6 +6,9 @@ import java.awt.Point;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import Objects.Direction;
+import Objects.Shape;
+
 public class LineObject extends Shape {
     protected Point tail;
     protected Point head;
@@ -23,7 +26,7 @@ public class LineObject extends Shape {
         this.connectShape = new ArrayList<Shape>();
         this.line = line;
         this.lineWidth = 2;
-        this.padding = 5;
+        this.padding = 10;
         this.color = Color.BLACK;
         this.setOpaque(false);
     }
@@ -84,6 +87,13 @@ public class LineObject extends Shape {
     public void setTailPoint(Point tail) {
         updateSizeAndLocation(tail, this.headRelatedToCanvas);
         repaint();
+    }
+
+    public void setPoint(Point point, boolean direction) {
+        if (direction == Direction.TAIL)
+            setTailPoint(point);
+        else 
+            setHeadPoint(point);
     }
 
     public void connectLineToObject(Shape obj, int port, boolean direction) {
