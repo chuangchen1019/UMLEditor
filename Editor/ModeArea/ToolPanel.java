@@ -4,12 +4,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.*;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import Editor.CanvasArea.Canvas;
 import Modes.ModeManager;
@@ -58,21 +56,21 @@ public class ToolPanel extends JPanel {
         }
     }
 
-    private ImageIcon getIcon(String filename) {
-        ImageIcon icon = new ImageIcon("Images/" + filename + ".png");
+    private ImageIcon getIcon(String file) {
+        ImageIcon icon = new ImageIcon("Images/" + file + ".png");
         int buttonIconSize = 50;
 
-        int originalWidth = icon.getIconWidth();
-        int originalHeight = icon.getIconHeight();
+        int originW = icon.getIconWidth();
+        int originH = icon.getIconHeight();
 
-        double widthRatio = (double) buttonIconSize / originalWidth;
-        double heightRatio = (double) buttonIconSize / originalHeight;
-        double ratio = Math.min(widthRatio, heightRatio);
+        double wRatio = (double) buttonIconSize / originW;
+        double hRatio = (double) buttonIconSize / originH;
+        double ratio = Math.min(wRatio, hRatio);
 
-        int scaledWidth = (int) (originalWidth * ratio);
-        int scaledHeight = (int) (originalHeight * ratio);
+        int scaledW = (int) (originW * ratio);
+        int scaledH = (int) (originH * ratio);
 
-        Image scaledImage = icon.getImage().getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
+        Image scaledImage = icon.getImage().getScaledInstance(scaledW, scaledH, Image.SCALE_SMOOTH);
         icon.setImage(scaledImage);
         return icon;
     }

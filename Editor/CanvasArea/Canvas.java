@@ -99,13 +99,13 @@ public class Canvas extends JPanel {
         this.shapeList.remove(obj);
     }
 
-    // public Shape getBasicObjectAt(Point point) {
-    //     Component component = this.getComponentAt(point.x, point.y);
-    //     if (component != null)
-    //         return ((Shape) component).getObjectAt(point);
-    //     else
-    //         return null;
-    // }
+    public Shape getBaseObjectAt(Point point) {
+        Component component = this.getComponentAt(point.x, point.y);
+        if (component != null)
+            return ((Shape) component).getObjectAt(point);
+        else
+            return null;
+    }
 
     @Override
     public Component getComponentAt(int x, int y) {
@@ -119,12 +119,12 @@ public class Canvas extends JPanel {
             return component;
     }
 
-    // public Point convertPointToCanvas(Component component, Point point) {
-    //     return SwingUtilities.convertPoint(component, point, this.box);
-    // }
+    public Point convertPointToCanvas(Component component, Point point) {
+        return SwingUtilities.convertPoint(component, point, this.box);
+    }
 
-    // public Point convertPointToComponent(Component component, Point point) {
-    //     return SwingUtilities.convertPoint(this.box, point, component);
-    // }
+    public Point convertPointToComponent(Component component, Point point) {
+        return SwingUtilities.convertPoint(this.box, point, component);
+    }
 
 }

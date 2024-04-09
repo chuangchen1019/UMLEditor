@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
 
 public class UseCaseObject extends BaseObject {
@@ -26,6 +27,8 @@ public class UseCaseObject extends BaseObject {
         this.setSize(this.width, this.height);
         
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        
         int ovalwidth = width - portSize * 3;
         int ovalheight = height - portSize * 2;
         

@@ -49,6 +49,20 @@ public abstract class Shape extends JPanel {
         return isSelected;
     }
 
+    public void addLine(LineObject line, int direction, boolean lineDirection) {
+    }
+
+    public void removeLine(LineObject line) {
+    }
+
+    public int getPortDirection(Point point) {
+        return -1;
+    }
+
+    public Point getPortLocation(int direction) {
+        return null;
+    }
+
     public abstract Shape getObjectAt(Point point);
 
 }

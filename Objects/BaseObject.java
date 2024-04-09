@@ -41,6 +41,43 @@ public class BaseObject extends Shape {
     }
 
     @Override
+    public Point getPortLocation(int direction) {
+        Point portLocation = null;
+        if (direction == Direction.UP) {// up
+            portLocation = new Point(this.width / 2, portSize);
+        } else if (direction == Direction.LEFT) {// left
+            portLocation = new Point(portSize, this.height / 2);
+        } else if (direction == Direction.DOWN) {// down
+            portLocation = new Point(this.width / 2, this.height - portSize);
+        } else if (direction == Direction.RIGHT) {// right
+            portLocation = new Point(this.width - portSize, this.height / 2);
+        }
+        return canvas.convertPointToCanvas(this, portLocation);
+    }
+
+    @Override
+    public int getPortDirection(Point point) {
+        point = canvas.convertPointToComponent(this, point);
+        Point port = new Point((-1 * ((float) height / width) * point.x + height - point.y) > 0 ? 1 : 0 // 1:左上 0:右下
+                , ((float) height / width * point.x - point.y) > 0 ? 1 : 0);// 1:右上 0:左下
+
+        int result = port.x * 2 + port.y;
+
+        switch (result) {
+            case 0:
+                return Direction.DOWN;
+            case 1:
+                return Direction.RIGHT;
+            case 2:
+                return Direction.LEFT;
+            case 3:
+                return Direction.UP;
+        }
+
+        return Direction.OUTSIDE;
+    }
+
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         // refreshLine();

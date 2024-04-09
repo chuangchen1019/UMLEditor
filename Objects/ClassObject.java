@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 
 public class ClassObject extends BaseObject {
     private Rectangle rect;
@@ -23,6 +24,8 @@ public class ClassObject extends BaseObject {
         this.setSize(this.width, this.height);
         
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
         int rectwidth = width - portSize * 2;
         int rectheight = height - portSize * 2;
         
