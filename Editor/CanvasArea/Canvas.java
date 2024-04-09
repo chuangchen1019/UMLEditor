@@ -1,7 +1,6 @@
 package Editor.CanvasArea;
 import javax.swing.*;
 
-import Editor.EditorMenu;
 import Objects.CompositeObject;
 import Objects.SelectRegion;
 import Objects.Shape;
@@ -9,7 +8,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Canvas extends JPanel {
     private static Canvas canvas;

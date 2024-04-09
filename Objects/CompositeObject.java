@@ -1,9 +1,7 @@
 package Objects;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
-
 import javax.swing.SwingUtilities;
 
 public class CompositeObject extends Shape {
