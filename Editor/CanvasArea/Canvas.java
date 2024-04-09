@@ -1,12 +1,15 @@
 package Editor.CanvasArea;
 import javax.swing.*;
 
+import Editor.EditorMenu;
+import Objects.CompositeObject;
 import Objects.SelectRegion;
 import Objects.Shape;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Canvas extends JPanel {
     private static Canvas canvas;
@@ -62,13 +65,11 @@ public class Canvas extends JPanel {
             Point loc = obj.getLocation();
 
             boolean up = loc.y > ltop.y;
-            boolean left = loc.x > ltop.x;
             boolean down = (loc.y + h) < rdown.y;
+            boolean left = loc.x > ltop.x;
             boolean right = (loc.x + w) < rdown.x;
 
-            if (up && left && down && right) {
-                obj.select();
-            }
+            if (up && left && down && right) obj.select();
         }
     }
 
@@ -78,7 +79,8 @@ public class Canvas extends JPanel {
     }
 
     public void cleanSelectRegion() {
-        SelectRegion.getInstance().freshRegionBorder(new Point(0, 0), new Point(0, 0));
+        Point originPoint = new Point(0, 0);
+        SelectRegion.getInstance().freshRegionBorder(originPoint, originPoint);
         refresh();
     }
 
@@ -92,12 +94,14 @@ public class Canvas extends JPanel {
         this.shapeList.add(obj);
     }
 
+    // Debug usage
     public void printAllShape() {
         for (Shape obj : this.shapeList) {
             System.out.println("shapeList: " + obj.getName());
         }
     }
 
+    // Debug usage
     public void printComponents() {
         System.out.println("Components in Canvas:");
         Component[] components = this.box.getComponents();
@@ -110,10 +114,10 @@ public class Canvas extends JPanel {
         this.shapeList.remove(obj);
     }
 
-    public Shape getBaseObjectAt(Point point) {
+    public Shape getBaseObjectAtPoint(Point point) {
         Component component = this.getComponentAt(point.x, point.y);
         if (component != null)
-            return ((Shape) component).getObjectAt(point);
+            return ((Shape) component).getObject(point);
         else
             return null;
     }
@@ -130,12 +134,43 @@ public class Canvas extends JPanel {
             return component;
     }
 
+    // 將 component 座標轉換成 canvas 座標
     public Point convertPointToCanvas(Component component, Point point) {
         return SwingUtilities.convertPoint(component, point, this.box);
     }
 
+    // 將 canvas 點座標轉換成 component 座標
     public Point convertPointToComponent(Component component, Point point) {
         return SwingUtilities.convertPoint(this.box, point, component);
     }
 
+    public void groupSelectedObjects() {
+        ArrayList<Shape> selectedList = new ArrayList<Shape>();
+        // Add selected shape to list
+        for (Shape shape : this.shapeList) {
+            if (shape.isSelected()) selectedList.add(shape);
+        }
+        if (selectedList.size() < 2) {
+            System.out.println("Need at least two object to group");
+            return;
+        }
+        for (Shape obj : selectedList) {
+            obj.unselect();
+            this.removeWholeObject(obj);
+        }
+        Shape groupObject = new CompositeObject(selectedList);
+        groupObject.addToCanvas();
+    }
+
+    public void ungroupSelectedObjects() {
+        for (Shape obj : this.shapeList) {
+            if (obj.isSelected()) obj.ungroup();
+        }
+    }
+
+    public void changeObjectName() {
+        for (Shape obj : this.shapeList) {
+            if (obj.isSelected()) obj.changeName();;
+        }
+    }
 }

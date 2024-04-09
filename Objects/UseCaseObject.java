@@ -31,13 +31,13 @@ public class UseCaseObject extends BaseObject {
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(Color.lightGray);
+        g2d.setColor(Color.LIGHT_GRAY);
         
         // draw oval
         oval.setFrame(portSize, portSize, ovalW, ovalH);
-        g2d.fillOval(portSize, portSize, ovalW, ovalH);;
+        g2d.fill(oval);
         g2d.setColor(Color.GRAY);
-        g2d.drawOval(portSize, portSize, ovalW - 1, ovalH - 1);
+        g2d.drawOval(portSize, portSize, ovalW-1, ovalH-1);
 
         // get text length
         int textW = g2d.getFontMetrics().stringWidth(this.getName());
@@ -47,7 +47,6 @@ public class UseCaseObject extends BaseObject {
         int x = (width - textW) / 2;
         int y = (height - textH) / 2 + textH - g2d.getFontMetrics().getDescent();
         g2d.drawString(this.getName(), x, y);
-
     }
     
     @Override

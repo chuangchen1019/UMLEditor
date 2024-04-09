@@ -43,7 +43,7 @@ public class LineObject extends Shape {
     }
 
     @Override
-    public Shape getObjectAt(Point point) {
+    public Shape getObject(Point point) {
         return null;
     }
 
@@ -79,11 +79,13 @@ public class LineObject extends Shape {
         return new Point(a.x - b.x, a.y - b.y);
     }
 
+    // Tail ---> <Head>
     public void setHeadPoint(Point head) {
         updateSizeAndLocation(this.tailRelatedToCanvas, head);
         repaint();
     }
 
+    // <Tail> ---> Head
     public void setTailPoint(Point tail) {
         updateSizeAndLocation(tail, this.headRelatedToCanvas);
         repaint();
@@ -126,5 +128,4 @@ public class LineObject extends Shape {
         this.line.color = this.color;
         this.line.draw(g, tail, head);
     }
-
 }

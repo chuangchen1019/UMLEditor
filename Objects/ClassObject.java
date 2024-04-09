@@ -12,8 +12,8 @@ public class ClassObject extends BaseObject {
     public ClassObject() {
         super("Class");
         this.rect = new Rectangle();
-        this.width = 80;
-        this.height = 90;
+        this.width = 90;
+        this.height = 120;
         this.setSize(this.width, this.height);
     }
     
@@ -42,6 +42,8 @@ public class ClassObject extends BaseObject {
                 rectheight / 3 + portSize);
         g2d.drawLine(portSize, (rectheight / 3) * 2 + portSize, width - portSize - 1,
                 (rectheight / 3) * 2 + portSize);
+        
+        g2d.setColor(Color.GRAY);
 
         // get text length
         int textW = g2d.getFontMetrics().stringWidth(this.getName());

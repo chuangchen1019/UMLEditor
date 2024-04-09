@@ -22,7 +22,7 @@ public abstract class LineMode extends Mode {
     public void mouseDragged(MouseEvent e) {
         super.mouseDragged(e);
         if (line == null) {
-            pressObject = canvas.getBaseObjectAt(pressPoint);
+            pressObject = canvas.getBaseObjectAtPoint(pressPoint);
             if (pressObject != null) {
                 // Create new Line and get the port direction / location
                 line = newLine();
@@ -38,7 +38,7 @@ public abstract class LineMode extends Mode {
             Point point = new Point(e.getX(), e.getY());
             if (connectToPort) {
                 // Get target object and set port location for connect
-                Shape object = canvas.getBaseObjectAt(point);
+                Shape object = canvas.getBaseObjectAtPoint(point);
                 if (object != null && object != pressObject) {
                     int port = object.getPortDirection(point);
                     line.setHeadPoint(object.getPortLocation(port));
@@ -56,7 +56,7 @@ public abstract class LineMode extends Mode {
         super.mouseReleased(e);
         boolean cancelLine = false;
         if (isDragged && line != null && pressObject != null) {
-            Shape releaseObject = canvas.getBaseObjectAt(releasePoint);
+            Shape releaseObject = canvas.getBaseObjectAtPoint(releasePoint);
 
             // Press and release at the base object but press object != release object
             // Connect these object by direction and port

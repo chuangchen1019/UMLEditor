@@ -2,13 +2,12 @@ package Objects;
 
 import java.awt.Color;
 import java.awt.Point;
-
 import javax.swing.JPanel;
 import Editor.CanvasArea.Canvas;
-import Objects.LineObject;
 
 public abstract class Shape extends JPanel {
-    protected int x, y, width, height;
+    protected int width;
+    protected int height;
     protected Color color;
     protected boolean isSelected;
     protected Canvas canvas;
@@ -37,6 +36,10 @@ public abstract class Shape extends JPanel {
             select();
         }
     }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
     
     public void addToCanvas() {
         canvas.add(this);
@@ -45,25 +48,21 @@ public abstract class Shape extends JPanel {
     public void removeFromCanvas() {
         canvas.remove(this);
     }
+    // Line object operation
+    public void addLine(LineObject line, int direction, boolean lineDirection) {}
+    public void removeLine(LineObject line) {}
 
-    public boolean isSelected() {
-        return isSelected;
-    }
+    // Update selected object's size and location with current position
+    public void freshRegionBorder(Point initialPoint, Point currentPoint) {}
 
-    public void addLine(LineObject line, int direction, boolean lineDirection) {
-    }
+    // Get the the point of specify port
+    public Point getPortLocation(int direction) { return null; }
+    // Get the Direction code of port
+    public int getPortDirection(Point point) { return -1; }
 
-    public void removeLine(LineObject line) {
-    }
-
-    public int getPortDirection(Point point) {
-        return -1;
-    }
-
-    public Point getPortLocation(int direction) {
-        return null;
-    }
-
-    public abstract Shape getObjectAt(Point point);
-
+    // Basic object op
+    public abstract Shape getObject(Point point);
+    public void changeName() {}
+    public void ungroup() {}
+    
 }

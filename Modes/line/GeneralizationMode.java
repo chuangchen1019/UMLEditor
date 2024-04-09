@@ -1,6 +1,6 @@
 package Modes.line;
 
-import Objects.AssociationLine;
+import Objects.GeneralizationLine;
 import Objects.LineObject;
 
 public class GeneralizationMode extends LineMode {
@@ -10,6 +10,6 @@ public class GeneralizationMode extends LineMode {
 
     @Override
     public LineObject newLine(){
-        return new LineObject(new AssociationLine());
+        return new LineObject(new GeneralizationLine());
     }
 }

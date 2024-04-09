@@ -28,7 +28,7 @@ public class SelectRegion extends Shape {
     }
     
     @Override
-    public Shape getObjectAt(Point point) {
+    public Shape getObject(Point point) {
         return null;
     }
 
@@ -50,7 +50,4 @@ public class SelectRegion extends Shape {
             g.drawRect(selectRegion.x, selectRegion.y, selectRegion.width, selectRegion.height);
         }
     }
-
-
-
 }

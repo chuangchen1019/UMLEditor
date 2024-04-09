@@ -17,7 +17,7 @@ public class CanvasListener extends MouseAdapter {
         return instance;
     }
 
-    public void setMode(Mode mode){
+    public void setMode(Mode mode) {
         if (mode == null) {
             System.out.println("gann mode is null");
         }else {
@@ -28,7 +28,6 @@ public class CanvasListener extends MouseAdapter {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Canvas: mouse clicked");
         mode.mouseClicked(e);
     }
 
@@ -49,7 +48,7 @@ public class CanvasListener extends MouseAdapter {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        System.out.println("Canvas: mouse dragged");
+        // System.out.println("Canvas: mouse dragged");
         mode.mouseDragged(e);
     }
 }

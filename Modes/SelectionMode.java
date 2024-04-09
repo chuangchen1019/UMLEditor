@@ -3,12 +3,11 @@ package Modes;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-
 import Objects.SelectRegion;
 import Objects.Shape;
 
 public class SelectionMode extends Mode {
-    private Shape pressComponent = null;  
+    private Shape pressedComponent = null;  
     private Point offset = null;
   
     public SelectionMode() {
@@ -33,8 +32,8 @@ public class SelectionMode extends Mode {
         super.mousePressed(e);
         Component component = canvas.getComponentAt(pressPoint.x, pressPoint.y);
         if (component != null) {
-            pressComponent = (Shape) component;
-            Point location = pressComponent.getLocation();
+            pressedComponent = (Shape) component;
+            Point location = pressedComponent.getLocation();
             offset = new Point(location.x - pressPoint.x, location.y - pressPoint.y);
         }else{
             canvas.add(SelectRegion.getInstance());
@@ -44,7 +43,7 @@ public class SelectionMode extends Mode {
     @Override
     public void mouseReleased(MouseEvent e) {
         super.mouseReleased(e);
-        pressComponent = null;
+        pressedComponent = null;
         if (isDragged) {
             isDragged = false;
             canvas.unselectAll();
@@ -56,17 +55,23 @@ public class SelectionMode extends Mode {
                 Math.max(pressPoint.x, releasePoint.x),
                 Math.max(pressPoint.y, releasePoint.y)
             );
+            // When mouse release -> perform select
             canvas.selectFrom(leftTop, rightDown);
         }
         canvas.cleanSelectRegion();
+        
+        // Remove selection window
         canvas.remove(SelectRegion.getInstance());
     }
 
-        @Override
+    @Override
     public void mouseDragged(MouseEvent e) {
         super.mouseDragged(e);
-        if (pressComponent != null) 
-            pressComponent.setLocation(e.getX() + offset.x, e.getY() + offset.y);
+        if (pressedComponent != null) {
+            // Update component postion for drag move
+            System.out.println(pressedComponent.getName() + " x: " + (e.getX()+offset.x) + ", y: " + (e.getY()+offset.y));
+            pressedComponent.setLocation(e.getX() + offset.x, e.getY() + offset.y);
+        }
         else canvas.setSelectRegion(pressPoint, e.getPoint());
     }
 }

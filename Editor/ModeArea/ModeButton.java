@@ -24,16 +24,9 @@ public class ModeButton extends JButton {
         this.size = 80;
         this.addActionListener(actionListener);
         this.addMouseListener(mouseListener);
-        this.setMinimumSize(new Dimension(size, size));
-        this.setMaximumSize(new Dimension(size, size));
+        this.setAllSize(size);
         this.setBackground(Color.WHITE);
-        this.setUI(new BasicButtonUI() {
-            @Override
-            protected void paintButtonPressed(Graphics g, AbstractButton b) {
-                g.setColor(Color.GRAY);
-                g.fillRect(0, 0, getWidth(), getHeight());
-            }
-        });
+        this.customButtonUI();
     }
 
     public void setMode() {
@@ -50,5 +43,20 @@ public class ModeButton extends JButton {
     public void unselect() {
         isSelected = false;
         setBackground(Color.WHITE);
+    }
+
+    private void customButtonUI() {
+        this.setUI(new BasicButtonUI() {
+            @Override
+            protected void paintButtonPressed(Graphics g, AbstractButton b) {
+                g.setColor(Color.GRAY);
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
+        });
+    }
+
+    private void setAllSize(int size) {
+        this.setMinimumSize(new Dimension(size, size));
+        this.setMaximumSize(new Dimension(size, size));
     }
 }
