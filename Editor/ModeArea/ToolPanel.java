@@ -14,7 +14,7 @@ import Modes.ModeManager;
 
 
 public class ToolPanel extends JPanel {
-    static JPanel toolPanel;
+    private static JPanel toolPanel;
     private ModeButton[] buttons;
     
     public ToolPanel() {
@@ -75,7 +75,4 @@ public class ToolPanel extends JPanel {
         icon.setImage(scaledImage);
         return icon;
     }
-
-
-        
 }

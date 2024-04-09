@@ -11,14 +11,17 @@ public class EditorFrame extends JFrame {
     private static String title = "UML Editor";
 
     public EditorFrame() {
-        setTitle(title);
+        super(title);
+        System.out.println("Editor Frame Initialization");
+        EditorMenu editorMenu = new EditorMenu();
+        this.setJMenuBar(editorMenu);
+
         Canvas canvas = Canvas.getInstance();
         JPanel toolPanel = ToolPanel.getInstance();
-        EditorMenu editorMenu = new EditorMenu();
 
         setLayout(new BorderLayout());
         
-        add(editorMenu, BorderLayout.NORTH);
+        // add(editorMenu, BorderLayout.NORTH);
         add(toolPanel, BorderLayout.WEST);
         add(canvas, BorderLayout.CENTER);
         pack();
@@ -30,6 +33,7 @@ public class EditorFrame extends JFrame {
 
     public static synchronized EditorFrame getInstance() {
         if (instance == null) {
+            System.out.println("No Editor Frame instance exist, create one");
             instance = new EditorFrame();
         }
         return instance;

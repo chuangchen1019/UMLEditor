@@ -15,7 +15,6 @@ import Modes.ModeManager;
 public class ModeButton extends JButton {
     private int mode;
     private int size;
-    private boolean isSelected = false;
 
     public ModeButton(int i, ImageIcon icon, ActionListener actionListener, MouseListener mouseListener) {
         super();
@@ -35,13 +34,11 @@ public class ModeButton extends JButton {
     }
 
     public void select() {
-        isSelected = true;
         this.setBackground(Color.GRAY);
 
     }
 
     public void unselect() {
-        isSelected = false;
         setBackground(Color.WHITE);
     }
 

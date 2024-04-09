@@ -155,7 +155,8 @@ public class BaseObject extends Shape {
     @Override
     public void changeName() {
         PopupDialog dialog = new PopupDialog(EditorFrame.getInstance());
-        if (dialog.isConfirm()) {
+        dialog.setVisible(true);
+        if (dialog.isConfirm() && !dialog.getName().isEmpty()) {
             String nameString = dialog.getName();
             this.setName(nameString);
         }

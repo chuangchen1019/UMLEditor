@@ -7,10 +7,11 @@ public class PopupDialog extends JDialog {
     private boolean confirm;
 
     public PopupDialog(JFrame mainFrame) {
-        super(mainFrame, "", true);
+        super(mainFrame, "", DEFAULT_MODALITY_TYPE);
+        System.out.println("PopupDialog create");
         // Set panel
         JPanel panel = new JPanel();
-        nameField = new JTextField();
+        nameField = new JTextField(10);
         panel.add(nameField);
         
         // Set button
@@ -21,7 +22,8 @@ public class PopupDialog extends JDialog {
         });
 
         JButton cancelButton = new JButton("Cancel");
-        confirmButton.addActionListener(e -> {
+        cancelButton.addActionListener(e -> {
+            nameField.setText("");
             confirm = false;
             setVisible(false);
         });

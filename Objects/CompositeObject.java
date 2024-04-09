@@ -1,5 +1,6 @@
 package Objects;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -30,7 +31,8 @@ public class CompositeObject extends Shape {
         int height = maxY - minY;
         setLocation(minX, minY);
         setSize(width, height);
-
+        setLayout(null);
+        setOpaque(false);
         System.out.println("CompositeObject Position: (" + getX() + ", " + getY() + ")");
 
         addObjects();
@@ -64,12 +66,10 @@ public class CompositeObject extends Shape {
     }
 
     protected void addObjects() {
-        int xOffset = getX();
-        int yOffset = getY();
         for (Shape shape : this.group) {
             Point pin = shape.getLocation();
             System.out.println("Shape Position: (" + pin.x + ", " + pin.y + ")");
-            shape.setLocation(pin.x + getX(), pin.y + getY());
+            shape.setLocation(pin.x - getX(), pin.y - getY());
             add(shape, 0);
         }
         System.out.println("CompositeObject Position After Adding Shapes: (" + getX() + ", " + getY() + ")");
